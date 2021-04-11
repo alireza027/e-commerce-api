@@ -5,8 +5,8 @@ const moment = require("moment");
 // add schema or variable
 const Schema = mongoose.Schema;
 
-// define role schema
-const RolesSchema = new Schema({
+// define config schema
+const ConfigSchema = new Schema({
     createdAt: {
         type: String,
         default: moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
@@ -18,5 +18,5 @@ const RolesSchema = new Schema({
     }
 });
 
-// export module and create role table
-export default mongoose.model("roles", RolesSchema);
+// export module and create configs table
+export default mongoose.model("configs", ConfigSchema);

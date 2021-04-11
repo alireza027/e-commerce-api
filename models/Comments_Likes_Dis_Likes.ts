@@ -5,8 +5,8 @@ const moment = require("moment");
 // add schema or variable
 const Schema = mongoose.Schema;
 
-// define role schema
-const RolesSchema = new Schema({
+// define comment like dis like schema
+const CommentLikeDisLikeSchema = new Schema({
     createdAt: {
         type: String,
         default: moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
@@ -18,5 +18,5 @@ const RolesSchema = new Schema({
     }
 });
 
-// export module and create role table
-export default mongoose.model("roles", RolesSchema);
+// export module and create comments likes dis likes table
+export default mongoose.model("comments_likes_dis_likes", CommentLikeDisLikeSchema);
