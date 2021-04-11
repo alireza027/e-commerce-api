@@ -5,7 +5,9 @@ import { Router, Request, Response } from "express";
 const router = Router();
 
 // start work to auth routes
-router.get("/", (req: Request, res: Response) => {});
+router.get("/", (req: Request, res: Response) => {
+    res.send("hello");
+});
 
 // export all auth routes
 export default router;
