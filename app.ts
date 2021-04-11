@@ -1,7 +1,9 @@
 // add dependencies
-import express, { Application } from "express";
-import * as mongoose from "mongoose";
+import express, { Application, Request, Response, NextFunction } from "express";
+import { connect } from "mongoose";
 import { json, urlencoded } from "body-parser";
+import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 import "dotenv/config";
 
 // add routes
@@ -23,6 +25,9 @@ import RoleRoute from "./routes/role";
 import TagRoute from "./routes/tag";
 import VideoUploadRoute from "./routes/videoUpload";
 
+// add middlewares
+import addEvent from "./middlewares/addEvent";
+
 // create instance
 const app: Application = express();
 
@@ -39,6 +44,12 @@ app.use(
     })
 );
 app.use(urlencoded({ extended: false }));
+
+// log data
+app.use((req: Request, res: Response, next: NextFunction) => {
+    addEvent(uuidv4(), req.method, req.ip, req.url, res.statusCode, moment(new Date()).format("YYYY-MM-DD HH:mm:ss"));
+    next();
+});
 
 // use routes
 app.use("/auth", AuthRoute);
@@ -60,15 +71,12 @@ app.use("/report-post", ReportPostRoute);
 app.use("/report-comment", ReportCommentRoute);
 
 // connect to mongoose
-mongoose
-    .connect(process.env.MONGO_ADDRESS || "mongodb://localhost:27017/shop", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then()
-    .catch();
+connect(process.env.MONGO_ADDRESS || "mongodb://localhost:27017/shop", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 // use experss
-app.listen(5001, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log(`Listening On ${process.env.PORT} PORT`);
 });
