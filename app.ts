@@ -18,7 +18,6 @@ import MoneyBackMethodRoute from "./routes/moneyBackMethod";
 import OrderRoute from "./routes/order";
 import PostOrProductRoute from "./routes/post";
 import PostLikeDisLikeRoute from "./routes/postLikeDisLike";
-import RecentEventRoute from "./routes/recentEvent";
 import ReportCommentRoute from "./routes/reportComment";
 import ReportPostRoute from "./routes/reportPost";
 import RoleRoute from "./routes/role";
@@ -84,12 +83,11 @@ app.use("/bookmark", BookmarkRoute);
 app.use("/order", OrderRoute);
 app.use("/role", RoleRoute);
 app.use("/money-back-method", MoneyBackMethodRoute);
-app.use("/recent-event", RecentEventRoute);
 app.use("/tag", TagRoute);
 app.use("/video-upload", VideoUploadRoute);
 app.use("/config", ConfigRoute);
-app.use("/report-post", ReportPostRoute);
 app.use("/report-comment", ReportCommentRoute);
+app.use("/report-post", ReportPostRoute);
 
 // connect to mongoose
 connect(process.env.MONGO_ADDRESS || "mongodb://localhost:27017/shop", {
